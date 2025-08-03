@@ -7,9 +7,16 @@ export type navItem = {
 };
 
 export type Movie = {
+  id: number;
   title: string;
-  posterImg: string;
-  year: string;
-  rated: string;
-  type: "movie" | "series";
+  release_date: string;
+  vote_average: number;
+  poster_path: string;
+  backdrop_path: string;
+  overview: string;
+  first_release_date: string;
+  adult: boolean;
+  original_name: string;
+  original_title: string;
+  original_language: string;
 };

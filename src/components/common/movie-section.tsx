@@ -1,7 +1,7 @@
-import { Movie } from "@/types";
 import MovieCard from "./movie-card";
 import MovieTitle from "./movie-title";
 import { ScrollArea, ScrollBar } from "../ui/scroll-area";
+import { Movie } from "@/types";
 
 type MovieSectionProps = {
   title: string;
@@ -9,22 +9,30 @@ type MovieSectionProps = {
 };
 
 export default function MovieSection({ title, movies }: MovieSectionProps) {
+  console.log(movies);
+  const formatMovieData = (movie: Movie) => ({
+    title: movie.title || movie.original_name || movie.original_title,
+    year:
+      (movie?.release_date ? movie.release_date.split("-")[0] : null) ||
+      (movie?.first_release_date
+        ? movie.first_release_date.split("-")[0]
+        : null) ||
+      "",
+    rated: movie.vote_average.toFixed(1),
+    type: "movie" as const,
+    posterImg: `https://image.tmdb.org/t/p/w500${movie.poster_path}`,
+  });
+
+  const formattedMovies = movies?.map(formatMovieData);
+
   if (title === "Trending")
     return (
       <section className="mb-8">
         <MovieTitle title={title} />
         <ScrollArea className="w-full">
           <div className="flex space-x-4">
-            {movies.map((movie, index) => (
-              <MovieCard
-                key={index}
-                title={movie.title}
-                year={movie.year}
-                rated={movie.rated}
-                type={movie.type}
-                posterImg={movie.posterImg}
-                typeCard="wide"
-              />
+            {formattedMovies.map((movie, index) => (
+              <MovieCard key={index} {...movie} typeCard="wide" />
             ))}
           </div>
           <ScrollBar orientation="horizontal" />
@@ -36,16 +44,8 @@ export default function MovieSection({ title, movies }: MovieSectionProps) {
     <section className="mb-8">
       <MovieTitle title={title} />
       <div className="grid grid-cols-2 sm:grid-cols-3 xl:grid-cols-4 gap-6">
-        {movies.map((movie, index) => (
-          <MovieCard
-            key={index}
-            title={movie.title}
-            year={movie.year}
-            rated={movie.rated}
-            type={movie.type}
-            posterImg={movie.posterImg}
-            typeCard="normal"
-          />
+        {formattedMovies.map((movie, index) => (
+          <MovieCard key={index} {...movie} typeCard="normal" />
         ))}
       </div>
     </section>
