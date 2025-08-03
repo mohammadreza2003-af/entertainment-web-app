@@ -28,7 +28,9 @@ export default function MovieCard({
   return (
     <Card
       className={`group relative overflow-hidden rounded-xl shadow-md font-outfit ${
-        typeCard === "wide" ? "w-[470px] h-[220px]" : "w-[280px] h-[200px]"
+        typeCard === "wide"
+          ? "sm:w-[440px] w-[220px] h-[130px] sm:h-[220px]"
+          : "w-full h-[120px] sm:h-[240px]"
       }`}
     >
       <div

@@ -12,7 +12,7 @@ export default function SearchBox() {
   };
 
   return (
-    <div className="relative w-full flex gap-2 items-center">
+    <div className="relative w-full flex gap-2 items-center mb-4">
       <div className="w-6 h-6">
         {search ? (
           <X className="w-6 h-6 cursor-pointer" onClick={handelClearSearch} />

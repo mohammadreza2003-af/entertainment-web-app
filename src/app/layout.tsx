@@ -32,11 +32,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${outfit.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} ${outfit.variable} antialiased overflow-x-hidden`}
       >
         <Provider>
           <AppSidebar />
-
           <main className="w-full">
             <Navigation />
             {children}
