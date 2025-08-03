@@ -1,0 +1,14 @@
+import { cn } from "@/lib/utils";
+import { ReactNode } from "react";
+
+type WrapperProps = {
+  children: ReactNode;
+  className?: string;
+};
+export default function Wrapper({ children, className }: WrapperProps) {
+  return (
+    <div className={cn("max-w-7xl w-full sm:px-8 px-6", className)}>
+      {children}
+    </div>
+  );
+}

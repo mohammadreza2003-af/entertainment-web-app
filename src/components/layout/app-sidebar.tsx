@@ -1,9 +1,4 @@
 "use client";
-import {
-  LayoutDashboardIcon,
-  PopcornIcon,
-  ClapperboardIcon,
-} from "lucide-react";
 
 import {
   Sidebar,
@@ -19,29 +14,10 @@ import {
 import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
-
-const items = [
-  {
-    title: "home",
-    url: "/",
-    icon: LayoutDashboardIcon,
-  },
-  {
-    title: "movies",
-    url: "/movies",
-    icon: ClapperboardIcon,
-  },
-  {
-    title: "series",
-    url: "/series",
-    icon: PopcornIcon,
-  },
-];
+import { navitems } from "@/constant";
 
 export function AppSidebar() {
   const [activeItem, setActiveItem] = useState<string | null>("home");
-
-  console.log(activeItem);
 
   return (
     <Sidebar
@@ -57,7 +33,7 @@ export function AppSidebar() {
         <SidebarGroup className="h-full">
           <SidebarGroupContent className="h-full">
             <SidebarMenu className="flex flex-col space-y-6 items-center justify-start h-full">
-              {items.map((item) => (
+              {navitems.map((item) => (
                 <SidebarMenuItem key={item.title}>
                   <SidebarMenuButton
                     onClick={() => setActiveItem(item.title)}
