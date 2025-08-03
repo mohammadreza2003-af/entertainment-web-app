@@ -15,7 +15,7 @@ export default function NavigationItem({
       <div className="w-6 h-6">
         <item.icon
           className={`w-full h-full  hover:text-red-500 transition duration-200 ease-in ${
-            activeItem === item.title ? "text-white" : "text-gray-500"
+            activeItem === item.url ? "text-white" : "text-gray-500"
           }`}
         />
       </div>

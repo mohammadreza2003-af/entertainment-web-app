@@ -13,11 +13,18 @@ import {
 } from "@/components/ui/sidebar";
 import Link from "next/link";
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect } from "react";
 import { navitems } from "@/constant";
+import { useNavStore } from "@/store";
+import { usePathname } from "next/navigation";
 
 export function AppSidebar() {
-  const [activeItem, setActiveItem] = useState<string | null>("home");
+  const path = usePathname();
+  const { activeLink, setActiveLink } = useNavStore();
+
+  useEffect(() => {
+    setActiveLink(path);
+  }, [path, setActiveLink]);
 
   return (
     <Sidebar
@@ -35,16 +42,12 @@ export function AppSidebar() {
             <SidebarMenu className="flex flex-col space-y-6 items-center justify-start h-full">
               {navitems.map((item) => (
                 <SidebarMenuItem key={item.title}>
-                  <SidebarMenuButton
-                    onClick={() => setActiveItem(item.title)}
-                    asChild
-                    className="hover:bg-transparent"
-                  >
+                  <SidebarMenuButton asChild className="hover:bg-transparent">
                     <Link href={item.url}>
                       <div className="w-6 h-6">
                         <item.icon
                           className={`w-full h-full  hover:text-red-500 transition duration-200 ease-in ${
-                            activeItem === item.title
+                            activeLink === item.url
                               ? "text-white"
                               : "text-gray-500"
                           }`}

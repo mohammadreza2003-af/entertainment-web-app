@@ -3,18 +3,20 @@ import Link from "next/link";
 import Wrapper from "../common/wrapper";
 import Image from "next/image";
 import { navitems } from "@/constant";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import NavigationItem from "./NavigationItem";
 import { usePathname } from "next/navigation";
+import { useNavStore } from "@/store";
 
 export default function Navigation() {
   const path = usePathname();
-  const [activeItem, setActiveItem] = useState<string | null>("home");
+  const { activeLink, setActiveLink } = useNavStore();
+
+  console.log(activeLink, "active link");
 
   useEffect(() => {
-    const newPath = path.split("/")[1];
-    setActiveItem(newPath);
-  }, [path]);
+    setActiveLink(path);
+  }, [path, setActiveLink]);
 
   return (
     <Wrapper className="absolute top-8 md:hidden">
@@ -27,7 +29,7 @@ export default function Navigation() {
           </div>
           <div className="flex items-center gap-4">
             {navitems.map((item, index) => (
-              <NavigationItem item={item} activeItem={activeItem} key={index} />
+              <NavigationItem item={item} activeItem={activeLink} key={index} />
             ))}
           </div>
           <div>
