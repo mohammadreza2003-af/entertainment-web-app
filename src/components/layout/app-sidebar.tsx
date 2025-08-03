@@ -27,10 +27,7 @@ export function AppSidebar() {
   }, [path, setActiveLink]);
 
   return (
-    <Sidebar
-      variant="floating"
-      className="rounded-full h-[90vh] my-auto left-4"
-    >
+    <Sidebar variant="floating" className="h-[90vh] my-auto left-4">
       <SidebarHeader className="flex items-center justify-center h-24">
         <Link href="/">
           <Image src="/images/logo.svg" alt="logo" width={32} height={32} />
