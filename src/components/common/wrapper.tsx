@@ -7,7 +7,7 @@ type WrapperProps = {
 };
 export default function Wrapper({ children, className }: WrapperProps) {
   return (
-    <div className={cn("max-w-7xl w-full sm:px-8 px-6", className)}>
+    <div className={cn("max-w-7xl mx-auto w-full sm:px-8 px-6", className)}>
       {children}
     </div>
   );
