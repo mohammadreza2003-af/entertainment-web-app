@@ -5,6 +5,7 @@ import MovieSection from "@/components/common/movie-section";
 import SearchBox from "@/components/common/search-box";
 import Wrapper from "@/components/common/wrapper";
 import { useQuery } from "@tanstack/react-query";
+import MovieLoading from "./movie-loading";
 
 type PageProps = {
   type: "movies" | "series";
@@ -19,7 +20,7 @@ export default function ClientMoviesOrSeries({ type }: PageProps) {
     staleTime: 5 * 60 * 1000,
   });
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading) return <MovieLoading />;
   if (error) return <div>Failed to load {type}.</div>;
 
   return (

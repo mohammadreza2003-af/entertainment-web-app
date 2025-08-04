@@ -20,6 +20,7 @@ export const getRandomMovies = async (type: "movies" | "series") => {
     params: {
       sort_by: "popularity.desc",
       page: randomPage,
+      include_adult: false,
     },
   });
   const movies = response.data.results;

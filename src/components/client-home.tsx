@@ -4,22 +4,51 @@ import React from "react";
 import Wrapper from "./common/wrapper";
 import SearchBox from "./common/search-box";
 import MovieSection from "./common/movie-section";
+import MovieLoading from "./movie-loading";
 import { useQuery } from "@tanstack/react-query";
-import { getTrandMoives } from "@/actions/api";
+import {
+  getRandomMovies,
+  getTrandMoives as getTrendingMovies,
+} from "@/actions/api";
 
 export default function ClientHome() {
-  const { data, isLoading } = useQuery({
-    queryKey: ["trandingMoives"],
-    queryFn: getTrandMoives,
+  const {
+    data: trendingMovies,
+    isLoading: isTrendingLoading,
+    error: trendingError,
+  } = useQuery({
+    queryKey: ["trendingMovies"],
+    queryFn: getTrendingMovies,
   });
 
-  if (isLoading) return null;
+  const {
+    data: randomMovies,
+    isLoading: isRandomLoading,
+    error: randomError,
+  } = useQuery({
+    queryKey: ["homeMovies"],
+    queryFn: () => getRandomMovies("movies"),
+    staleTime: 5 * 60 * 1000,
+  });
+
+  const isLoading = isTrendingLoading || isRandomLoading;
+
+  if (isLoading) return <MovieLoading type="home" />;
+
+  if (trendingError || randomError) {
+    return (
+      <div className="text-center text-red-500 py-10">
+        Failed to load movies. Please try again later.
+      </div>
+    );
+  }
+
   return (
     <Wrapper>
       <div className="w-full md:mt-12 mt-28">
         <SearchBox />
-        <MovieSection title="Trending" movies={data} />
-        <MovieSection title="Recommended for you" movies={data} />
+        <MovieSection title="Trending" movies={trendingMovies} />
+        <MovieSection title="Movies" movies={randomMovies} />
       </div>
     </Wrapper>
   );
