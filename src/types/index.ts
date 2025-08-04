@@ -6,7 +6,7 @@ export type navItem = {
   icon: LucideIcon;
 };
 
-export type Movie = {
+export type TypeMovieCard = {
   id: number;
   title: string;
   release_date: string;
@@ -19,4 +19,5 @@ export type Movie = {
   original_name: string;
   original_title: string;
   original_language: string;
+  first_air_date: string;
 };

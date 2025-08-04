@@ -7,6 +7,6 @@ type PageProps = {
 };
 
 export default async function Page({ params }: PageProps) {
-  const { type } = params;
+  const { type } = await params;
   return <ClientMoviesOrSeries type={type} />;
 }
