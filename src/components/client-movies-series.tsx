@@ -8,7 +8,7 @@ import { useQuery } from "@tanstack/react-query";
 import MovieLoading from "./movie-loading";
 
 type PageProps = {
-  type: "movies" | "series";
+  type: string;
 };
 
 export default function ClientMoviesOrSeries({ type }: PageProps) {

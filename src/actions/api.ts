@@ -6,7 +6,7 @@ export async function getTrandMoives() {
   return data.results;
 }
 
-export const getRandomMovies = async (type: "movies" | "series") => {
+export const getRandomMovies = async (type: string) => {
   const totalPages = 50;
   let fixType = "";
 
