@@ -8,8 +8,8 @@ export default function MovieCardLoading({ type }: MovieCardLoadingProps) {
     <Skeleton
       className={`${
         type === "wide"
-          ? "sm:w-[440px] w-[220px] h-[130px] sm:h-[220px]"
-          : "w-full h-[120px] sm:h-[240px]"
+          ? "sm:w-[300px] lg:w-[400px] w-[220px] h-[280px] sm:h-[500px]"
+          : "w-full h-[220px] sm:h-[400px]"
       }`}
     />
   );

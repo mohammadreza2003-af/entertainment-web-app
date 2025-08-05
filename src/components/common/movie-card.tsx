@@ -29,8 +29,8 @@ export default function MovieCard({
     <Card
       className={`group relative overflow-hidden rounded-xl shadow-md font-outfit ${
         typeCard === "wide"
-          ? "sm:w-[440px] w-[220px] h-[130px] sm:h-[220px]"
-          : "w-full h-[120px] sm:h-[240px]"
+          ? "sm:w-[300px] lg:w-[400px] w-[220px] h-[280px] sm:h-[500px]"
+          : "w-full h-[220px] sm:h-[400px]"
       }`}
     >
       <div
@@ -60,7 +60,7 @@ export default function MovieCard({
           <Dot />
           <span>{rated}</span>
         </div>
-        <h3 className="text-lg font-semibold">{title}</h3>
+        <h3 className="sm:text-lg font-semibold">{title}</h3>
       </div>
       <Button
         size="icon"
