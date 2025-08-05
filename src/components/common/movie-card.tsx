@@ -1,3 +1,5 @@
+"use client";
+
 import { Card } from "@/components/ui/card";
 import {
   PlayIcon,
@@ -7,24 +9,30 @@ import {
   PopcornIcon,
 } from "lucide-react";
 import { Button } from "../ui/button";
+import { useRouter } from "next/navigation";
 
 type CardProps = {
+  id: number;
   title: string;
   year: string;
   rated: string;
-  type: "movie" | "series";
+  typeMovie: "movies" | "series";
   posterImg: string;
   typeCard: "wide" | "normal";
 };
 
 export default function MovieCard({
+  id,
   title,
   year,
   rated,
-  type,
+  typeMovie,
   posterImg,
   typeCard,
 }: CardProps) {
+  const navigate = useRouter();
+  console.log(typeMovie, "type");
+  const deatailPath = `/${typeMovie === "movies" ? "movies" : "series"}/${id}`;
   return (
     <Card
       className={`group relative overflow-hidden rounded-xl shadow-md font-outfit ${
@@ -51,20 +59,21 @@ export default function MovieCard({
         <div className="text-sm flex gap-2 text-gray-200">
           <span>{year}</span>
           <Dot />
-          {type === "movie" ? (
+          {typeMovie === "movies" ? (
             <ClapperboardIcon width={16} height={16} />
           ) : (
             <PopcornIcon width={16} height={16} />
           )}
-          <span className="capitalize">{type}</span>
+          <span className="capitalize">{typeMovie}</span>
           <Dot />
           <span>{rated}</span>
         </div>
         <h3 className="sm:text-lg font-semibold">{title}</h3>
       </div>
       <Button
+        onClick={() => navigate.push(deatailPath)}
         size="icon"
-        className="absolute top-1/2 left-1/2 z-30 -translate-x-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition duration-300 text-white bg-white/20 hover:bg-white/40 p-3 rounded-full backdrop-blur"
+        className="absolute cursor-pointer top-1/2 left-1/2 z-30 -translate-x-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition duration-300 text-white bg-white/20 hover:bg-white/40 p-3 rounded-full backdrop-blur"
       >
         <PlayIcon className="w-6 h-6" />
       </Button>

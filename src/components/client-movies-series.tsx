@@ -8,12 +8,10 @@ import { useQuery } from "@tanstack/react-query";
 import MovieLoading from "./movie-loading";
 
 type PageProps = {
-  type: string;
+  type: "movies" | "series";
 };
 
 export default function ClientMoviesOrSeries({ type }: PageProps) {
-  console.log(type, "type");
-
   const { data, isLoading, error } = useQuery({
     queryKey: ["media", type],
     queryFn: () => getRandomMovies(type),
@@ -28,6 +26,7 @@ export default function ClientMoviesOrSeries({ type }: PageProps) {
       <div className="w-full md:mt-12 mt-28">
         <SearchBox />
         <MovieSection
+          type={type}
           title={type === "movies" ? "Movies" : "TV Series"}
           movies={data}
         />

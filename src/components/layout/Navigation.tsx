@@ -12,8 +12,6 @@ export default function Navigation() {
   const path = usePathname();
   const { activeLink, setActiveLink } = useNavStore();
 
-  console.log(activeLink, "active link");
-
   useEffect(() => {
     setActiveLink(path);
   }, [path, setActiveLink]);

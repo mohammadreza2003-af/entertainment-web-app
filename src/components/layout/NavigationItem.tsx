@@ -9,7 +9,6 @@ export default function NavigationItem({
   item,
   activeItem,
 }: NavigationItemProps) {
-  console.log(item);
   return (
     <Link href={item.url}>
       <div className="w-6 h-6">

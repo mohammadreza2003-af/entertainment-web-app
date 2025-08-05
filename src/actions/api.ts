@@ -24,6 +24,5 @@ export const getRandomMovies = async (type: string) => {
     },
   });
   const movies = response.data.results;
-  console.log(movies, ",obie");
   return movies;
 };

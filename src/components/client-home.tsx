@@ -21,6 +21,8 @@ export default function ClientHome() {
     queryFn: getTrendingMovies,
   });
 
+  console.log(trendingMovies);
+
   const {
     data: randomMovies,
     isLoading: isRandomLoading,

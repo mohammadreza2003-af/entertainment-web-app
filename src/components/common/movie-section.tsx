@@ -6,13 +6,17 @@ import { TypeMovieCard } from "@/types";
 type MovieSectionProps = {
   title: string;
   movies: TypeMovieCard[];
+  type?: "movies" | "series";
 };
 
-export default function MovieSection({ title, movies }: MovieSectionProps) {
-  console.log(movies);
+export default function MovieSection({
+  title,
+  movies,
+  type,
+}: MovieSectionProps) {
   const formatMovieData = (movie: TypeMovieCard) => {
-    console.log(movie, "movie");
     return {
+      id: movie.id,
       title: movie.title || movie.original_name || movie.original_title,
       year:
         (movie?.release_date ? movie.release_date.split("-")[0] : null) ||
@@ -22,7 +26,7 @@ export default function MovieSection({ title, movies }: MovieSectionProps) {
         (movie?.first_air_date ? movie.first_air_date.split("-")[0] : null) ||
         "",
       rated: movie.vote_average.toFixed(1),
-      type: "movie" as const,
+      typeMovie: type ?? "movies",
       posterImg: `https://image.tmdb.org/t/p/w500${movie.poster_path}`,
     };
   };
