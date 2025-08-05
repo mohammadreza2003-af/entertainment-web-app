@@ -7,6 +7,7 @@ import { useQuery } from "@tanstack/react-query";
 import { Star, Clock, Calendar } from "lucide-react";
 import Image from "next/image";
 import Wrapper from "./common/wrapper";
+import BackButton from "./common/back-btn";
 
 type Movie = {
   id: number;
@@ -57,6 +58,9 @@ export default function MovieDetails({ id }: { id: string }) {
   return (
     <Wrapper>
       <div className="w-full md:mt-12 mt-28">
+        <div className="mb-4">
+          <BackButton />
+        </div>
         <div className="relative h-[70vh] overflow-hidden">
           <div
             className="absolute inset-0 bg-cover bg-center rounded-2xl"
