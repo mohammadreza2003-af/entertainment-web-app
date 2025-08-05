@@ -1,12 +1,13 @@
 "use client";
 
-import React from "react";
+import React, { useEffect } from "react";
 import Wrapper from "./common/wrapper";
 import SearchBox from "./common/search-box";
 import MovieSection from "./common/movie-section";
 import MovieLoading from "./movie-loading";
 import { useQuery } from "@tanstack/react-query";
 import {
+  getMovieById,
   getRandomMovies,
   getTrandMoives as getTrendingMovies,
 } from "@/actions/api";
@@ -20,8 +21,6 @@ export default function ClientHome() {
     queryKey: ["trendingMovies"],
     queryFn: getTrendingMovies,
   });
-
-  console.log(trendingMovies);
 
   const {
     data: randomMovies,

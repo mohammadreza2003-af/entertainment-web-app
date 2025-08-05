@@ -7,7 +7,7 @@ export type navItem = {
 };
 
 export type TypeMovieCard = {
-  id: number;
+  id: string;
   title: string;
   release_date: string;
   vote_average: number;

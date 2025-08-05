@@ -12,7 +12,7 @@ import { Button } from "../ui/button";
 import { useRouter } from "next/navigation";
 
 type CardProps = {
-  id: number;
+  id: string;
   title: string;
   year: string;
   rated: string;
