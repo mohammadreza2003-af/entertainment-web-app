@@ -69,7 +69,6 @@ export default function MovieDetails({ id }: { id: string }) {
           <div className="relative container mx-auto px-4 sm:px-6 py-10 flex flex-col items-center sm:items-end">
             <div className="w-full max-w-6xl">
               <div className="flex flex-col md:flex-row md:items-end gap-y-8 gap-x-12">
-                {/* Poster */}
                 <div className="flex-shrink-0 self-center md:self-auto">
                   <Image
                     width={360}
