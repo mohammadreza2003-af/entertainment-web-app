@@ -12,7 +12,7 @@ export default function BackButton() {
       onClick={() => navigate.back()}
     >
       <ArrowLeft width={24} height={24} />
-      Back -
+      Back
     </Button>
   );
 }
