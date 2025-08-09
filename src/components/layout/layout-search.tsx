@@ -2,23 +2,23 @@
 
 import { usePathname } from "next/navigation";
 import SearchBox from "@/components/common/search-box";
-import SearchResults from "@/components/common/search-results";
 import Wrapper from "../common/wrapper";
 
 export default function LayoutSearch() {
   const pathname = usePathname();
 
+  const pathSegments = pathname.split("/").filter(Boolean);
+
   const showSearch =
     pathname === "/" ||
-    pathname.startsWith("/movies") ||
-    pathname.startsWith("/series");
+    (pathname.startsWith("/movies") && pathSegments.length === 1) ||
+    (pathname.startsWith("/series") && pathSegments.length === 1);
 
   if (!showSearch) return null;
 
   return (
-    <Wrapper className="md:my-6 my-4">
+    <Wrapper>
       <SearchBox />
-      <SearchResults />
     </Wrapper>
   );
 }

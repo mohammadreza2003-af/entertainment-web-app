@@ -2,7 +2,6 @@
 
 import { getRandomMovies } from "@/actions/api";
 import MovieSection from "@/components/common/movie-section";
-import SearchBox from "@/components/common/search-box";
 import Wrapper from "@/components/common/wrapper";
 import { useQuery } from "@tanstack/react-query";
 import MovieLoading from "./movie-loading";
@@ -24,7 +23,6 @@ export default function ClientMoviesOrSeries({ type }: PageProps) {
   return (
     <Wrapper>
       <div className="w-full">
-        <SearchBox />
         <MovieSection
           type={type}
           title={type === "movies" ? "Movies" : "TV Series"}

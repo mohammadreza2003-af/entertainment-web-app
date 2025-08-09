@@ -2,62 +2,36 @@
 
 import React from "react";
 import Wrapper from "./common/wrapper";
-import SearchBox from "./common/search-box";
 import MovieSection from "./common/movie-section";
 import MovieLoading from "./movie-loading";
 import { useQuery } from "@tanstack/react-query";
 import {
   getRandomMovies,
   getTrandMoives as getTrendingMovies,
-  searchMovie,
 } from "@/actions/api";
-import { useSearchParams } from "next/navigation";
+import { useSearchStore } from "@/store";
+import SearchResults from "./common/search-results";
 
 export default function ClientHome() {
-  const searchParams = useSearchParams();
-  const searchQuery = searchParams.get("search") || "";
+  const { search } = useSearchStore();
 
-  const {
-    data: searchResults,
-    isLoading: isSearchLoading,
-    error: searchError,
-  } = useQuery({
-    queryKey: ["searchMovies", searchQuery],
-    queryFn: () => searchMovie(searchQuery),
-    enabled: !!searchQuery,
-  });
-
-  const {
-    data: trendingMovies,
-    isLoading: isTrendingLoading,
-    error: trendingError,
-  } = useQuery({
+  const trendingQuery = useQuery({
     queryKey: ["trendingMovies"],
     queryFn: getTrendingMovies,
-    enabled: !searchQuery,
   });
 
-  const {
-    data: randomMovies,
-    isLoading: isRandomLoading,
-    error: randomError,
-  } = useQuery({
+  const randomQuery = useQuery({
     queryKey: ["homeMovies"],
     queryFn: () => getRandomMovies("movies"),
     staleTime: 5 * 60 * 1000,
-    enabled: !searchQuery,
   });
 
-  const isLoading = searchQuery
-    ? isSearchLoading
-    : isTrendingLoading || isRandomLoading;
+  const isLoading = trendingQuery.isLoading || randomQuery.isLoading;
+  const hasError = trendingQuery.error || randomQuery.error;
 
-  const hasError = searchQuery ? searchError : trendingError || randomError;
-
-  if (isLoading)
-    return (
-      <MovieLoading isSearching={searchQuery ? true : false} type="home" />
-    );
+  if (isLoading) {
+    return <MovieLoading type="home" />;
+  }
 
   if (hasError) {
     return (
@@ -66,19 +40,15 @@ export default function ClientHome() {
       </div>
     );
   }
-
   return (
     <Wrapper>
       <div className="w-full">
-        {searchQuery ? (
-          <MovieSection
-            title={`Results for "${searchQuery}"`}
-            movies={searchResults}
-          />
+        {search ? (
+          <SearchResults />
         ) : (
           <>
-            <MovieSection title="Trending" movies={trendingMovies} />
-            <MovieSection title="Movies" movies={randomMovies} />
+            <MovieSection title="Trending" movies={trendingQuery.data || []} />
+            <MovieSection title="Movies" movies={randomQuery.data || []} />
           </>
         )}
       </div>
