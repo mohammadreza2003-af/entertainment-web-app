@@ -13,7 +13,8 @@ import { useSearchStore } from "@/store";
 import SearchResults from "./common/search-results";
 
 export default function ClientHome() {
-  const { search } = useSearchStore();
+  const { search: rawSearch } = useSearchStore();
+  const search = rawSearch.trim();
 
   const trendingQuery = useQuery({
     queryKey: ["trendingMovies"],
@@ -25,6 +26,8 @@ export default function ClientHome() {
     queryFn: () => getRandomMovies("movies"),
     staleTime: 5 * 60 * 1000,
   });
+
+  const isSearching = search.length > 0;
 
   const isLoading = trendingQuery.isLoading || randomQuery.isLoading;
   const hasError = trendingQuery.error || randomQuery.error;
@@ -43,7 +46,7 @@ export default function ClientHome() {
   return (
     <Wrapper>
       <div className="w-full">
-        {search ? (
+        {isSearching ? (
           <SearchResults />
         ) : (
           <>
