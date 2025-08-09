@@ -15,21 +15,42 @@ export default function MovieSection({
   type,
 }: MovieSectionProps) {
   const formatMovieData = (movie: TypeMovieCard) => {
+    let typeMovie: "movies" | "series" = "movies";
+
+    if ("media_type" in movie) {
+      if (movie.media_type === "tv") typeMovie = "series";
+      else if (movie.media_type === "movie") typeMovie = "movies";
+    } else {
+      if (movie.first_air_date) typeMovie = "series";
+      else if (movie.release_date) typeMovie = "movies";
+      else if (type) {
+        typeMovie = type;
+      }
+    }
+
     return {
       id: movie.id,
-      title: movie.title || movie.original_name || movie.original_title,
+      title:
+        movie.title ||
+        movie.original_name ||
+        movie.original_title ||
+        "Untitled",
       year:
-        (movie?.release_date ? movie.release_date.split("-")[0] : null) ||
-        (movie?.first_release_date
+        (movie.release_date
+          ? movie.release_date.split("-")[0]
+          : movie.first_air_date
+          ? movie.first_air_date.split("-")[0]
+          : movie.first_release_date
           ? movie.first_release_date.split("-")[0]
-          : null) ||
-        (movie?.first_air_date ? movie.first_air_date.split("-")[0] : null) ||
-        "",
-      rated: movie.vote_average.toFixed(1),
-      typeMovie: type ?? "movies",
-      posterImg: `https://image.tmdb.org/t/p/w500${movie.poster_path}`,
+          : "") || "",
+      rated: movie.vote_average?.toFixed(1) || "N/A",
+      typeMovie,
+      posterImg: movie.poster_path
+        ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
+        : "/placeholder-image-path.jpg",
     };
   };
+
   const formattedMovies = movies?.map(formatMovieData);
 
   if (title === "Trending")

@@ -36,7 +36,7 @@ export const searchMovie = async (query: string) => {
   if (!query) return [];
 
   try {
-    const res = await API.get("/search/movie", {
+    const res = await API.get("/search/multi", {
       params: {
         query,
         include_adult: false,

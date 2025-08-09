@@ -18,7 +18,7 @@ export default function SearchResults() {
 
   if (!query) return null;
 
-  if (isLoading) return <MovieLoading isSearching />;
+  if (isLoading) return <MovieLoading />;
 
   if (error) {
     return (
