@@ -6,21 +6,37 @@ export async function getTrandMoives() {
   return data.results;
 }
 
-export const getRandomMovies = async (type: "movies" | "series") => {
-  const totalPages = 20;
+type MediaType = "movies" | "series";
 
+export const getRandomMovies = async (
+  type: MediaType,
+  options?: {
+    minVoteCount?: number;
+    year?: number;
+    genreIds?: number[];
+  }
+) => {
   const fixType = type === "movies" ? "movie" : "tv";
-
+  const totalPages = 50;
   const randomPage = Math.floor(Math.random() * totalPages) + 1;
 
   try {
     const response = await API.get(`/discover/${fixType}`, {
       params: {
         include_adult: false,
-        include_null_first_air_dates: false,
+        include_null_first_air_dates: true,
         language: "en-US",
-        page: randomPage,
         sort_by: "popularity.desc",
+        page: randomPage,
+        "vote_count.gte": options?.minVoteCount ?? 100,
+        ...(options?.year
+          ? type === "movies"
+            ? { primary_release_year: options.year }
+            : { first_air_date_year: options.year }
+          : {}),
+        ...(options?.genreIds
+          ? { with_genres: options.genreIds.join(",") }
+          : {}),
       },
     });
 
