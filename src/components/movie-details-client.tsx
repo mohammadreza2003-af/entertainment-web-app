@@ -61,7 +61,7 @@ export default function MovieDetails({ id }: { id: string }) {
 
   return (
     <Wrapper>
-      <div className="w-full md:mt-12 mt-28">
+      <div className="w-full">
         <div className="mb-4">
           <BackButton />
         </div>

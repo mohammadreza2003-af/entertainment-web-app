@@ -17,7 +17,7 @@ export default function Navigation() {
   }, [path, setActiveLink]);
 
   return (
-    <Wrapper className="absolute top-8 md:hidden">
+    <Wrapper className="md:hidden mt-4">
       <nav className="bg-sidebar p-4 rounded-3xl top-5 w-full">
         <div className="flex items-center justify-between">
           <div>

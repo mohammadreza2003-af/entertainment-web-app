@@ -23,7 +23,7 @@ export default function ClientMoviesOrSeries({ type }: PageProps) {
 
   return (
     <Wrapper>
-      <div className="w-full md:mt-12 mt-28">
+      <div className="w-full">
         <SearchBox />
         <MovieSection
           type={type}

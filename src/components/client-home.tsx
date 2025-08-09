@@ -69,7 +69,7 @@ export default function ClientHome() {
 
   return (
     <Wrapper>
-      <div className="w-full md:mt-12 mt-28">
+      <div className="w-full">
         {searchQuery ? (
           <MovieSection
             title={`Results for "${searchQuery}"`}
