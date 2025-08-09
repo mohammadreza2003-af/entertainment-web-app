@@ -27,7 +27,7 @@ export const getRandomMovies = async (type: string) => {
   return movies;
 };
 
-export const getMovieById = async (id: string) => {
-  const res = await API.get(`/movie/${id}`);
+export const getMovieById = async (id: string, type: string = "movie") => {
+  const res = await API.get(`/${type}/${id}`);
   return res.data;
 };

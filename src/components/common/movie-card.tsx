@@ -31,7 +31,6 @@ export default function MovieCard({
   typeCard,
 }: CardProps) {
   const navigate = useRouter();
-  console.log(typeMovie, "type");
   const deatailPath = `/${typeMovie === "movies" ? "movies" : "series"}/${id}`;
   return (
     <Card

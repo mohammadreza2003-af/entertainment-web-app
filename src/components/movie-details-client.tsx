@@ -8,6 +8,7 @@ import { Star, Clock, Calendar } from "lucide-react";
 import Image from "next/image";
 import Wrapper from "./common/wrapper";
 import BackButton from "./common/back-btn";
+import { usePathname } from "next/navigation";
 
 type Movie = {
   id: number;
@@ -31,9 +32,12 @@ type Movie = {
 };
 
 export default function MovieDetails({ id }: { id: string }) {
+  const path = usePathname();
+  const type = path.includes("movies") ? "movie" : "tv";
+
   const { data: movie, isLoading } = useQuery<Movie>({
     queryKey: [id],
-    queryFn: () => getMovieById(id),
+    queryFn: () => getMovieById(id, type),
   });
 
   if (isLoading) return null;
