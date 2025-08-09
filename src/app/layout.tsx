@@ -4,6 +4,7 @@ import "./globals.css";
 import Provider from "@/providers/provider";
 import { AppSidebar } from "@/components/layout/app-sidebar";
 import Navigation from "@/components/layout/Navigation";
+import SearchBox from "@/components/common/search-box";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -38,6 +39,7 @@ export default function RootLayout({
           <AppSidebar />
           <main className="w-full">
             <Navigation />
+            <SearchBox />
             {children}
           </main>
         </Provider>

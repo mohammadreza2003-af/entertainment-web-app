@@ -31,3 +31,24 @@ export const getMovieById = async (id: string, type: string = "movie") => {
   const res = await API.get(`/${type}/${id}`);
   return res.data;
 };
+
+export const searchMovie = async (query: string) => {
+  if (!query) return [];
+
+  try {
+    const res = await API.get("/search/movie", {
+      params: {
+        query,
+        include_adult: false,
+        language: "en-US",
+        page: 1,
+      },
+    });
+    return res.data.results;
+  } catch (error) {
+    if (error instanceof Error) {
+      throw new Error(error.message);
+    }
+    return [];
+  }
+};
