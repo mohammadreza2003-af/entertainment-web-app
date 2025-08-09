@@ -18,8 +18,8 @@ const badgeVariants = cva(
         outline:
           "text-foreground [a&]:hover:bg-accent [a&]:hover:text-accent-foreground",
         genre:
-          "border-transparent bg-gradient-primary text-primary-foreground shadow-glow",
-        rating: "border-accent bg-accent/20 text-accent font-bold",
+          "border-transparent bg-gradient-primary text-primary shadow-glow",
+        rating: "border-accent bg-accent/20 text-gray-400 font-bold",
       },
     },
     defaultVariants: {

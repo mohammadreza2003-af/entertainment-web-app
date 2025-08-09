@@ -65,18 +65,18 @@ export default function MovieDetails({ id }: { id: string }) {
         <div className="mb-4">
           <BackButton />
         </div>
-        <div className="relative h-[70vh] overflow-hidden">
+        <div className="relative h-[70vh] overflow-hidden flex items-center">
           <div
-            className="absolute inset-0 bg-cover bg-center rounded-2xl"
+            className="absolute inset-0 bg-cover bg-center rounded-2xlz"
             style={{
               backgroundImage: `url(https://image.tmdb.org/t/p/original${movie?.backdrop_path})`,
             }}
           />
           <div className="absolute inset-0 bg-[image:var(--gradient-hero)]" />
 
-          <div className="relative container mx-auto px-4 sm:px-6 py-10 flex flex-col items-center sm:items-end">
+          <div className="relative mx-auto px-4 sm:px-6 py-10 flex flex-col items-center sm:items-start">
             <div className="w-full max-w-6xl">
-              <div className="flex flex-col md:flex-row md:items-end gap-y-8 gap-x-12">
+              <div className="flex flex-col lg:flex-row items-center lg:items-end gap-y-8 gap-x-12">
                 <div className="flex-shrink-0 self-center md:self-auto">
                   <Image
                     width={360}
@@ -92,7 +92,7 @@ export default function MovieDetails({ id }: { id: string }) {
                   </h1>
 
                   {movie?.tagline && (
-                    <p className="text-lg sm:text-xl text-accent italic font-medium">
+                    <p className="text-lg sm:text-xl text-white italic font-medium">
                       &quot;{movie.tagline}&quot;
                     </p>
                   )}
@@ -105,17 +105,17 @@ export default function MovieDetails({ id }: { id: string }) {
                   </div>
                   <div className="flex flex-wrap items-center gap-x-6 gap-y-3 text-sm sm:text-base md:text-lg">
                     <div className="flex items-center gap-2">
-                      <Star className="w-5 h-5 text-accent fill-accent" />
+                      <Star className="w-5 h-5 text-accent fill-white" />
                       <Badge variant="rating">
                         {movie?.vote_average.toFixed(1)}/10
                       </Badge>
                     </div>
-                    <div className="flex items-center gap-2 text-muted-foreground">
+                    <div className="flex items-center gap-2  text-white">
                       <Clock className="w-5 h-5" />
                       <span>{movie?.runtime} min</span>
                     </div>
                     {movie?.release_date && (
-                      <div className="flex items-center gap-2 text-muted-foreground">
+                      <div className="flex items-center gap-2 text-white">
                         <Calendar className="w-5 h-5" />
                         <span>{formatDate(movie?.release_date)}</span>
                       </div>
@@ -222,10 +222,8 @@ export default function MovieDetails({ id }: { id: string }) {
                   )}
                   {movie?.revenue && movie.revenue > 0 && (
                     <div>
-                      <p className="text-sm font-medium text-muted-foreground">
-                        Revenue
-                      </p>
-                      <p className="text-lg text-accent font-medium">
+                      <p className="text-sm font-medium text-white">Revenue</p>
+                      <p className="text-lg text-white font-medium">
                         {formatCurrency(movie.revenue)}
                       </p>
                     </div>
