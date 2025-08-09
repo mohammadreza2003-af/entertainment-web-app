@@ -6,25 +6,29 @@ export async function getTrandMoives() {
   return data.results;
 }
 
-export const getRandomMovies = async (type: string) => {
+export const getRandomMovies = async (type: "movies" | "series") => {
   const totalPages = 50;
-  let fixType = "";
 
-  if (type === "movies") {
-    fixType = "movie";
-  } else {
-    fixType = "tv";
-  }
+  const fixType = type === "movies" ? "movie" : "tv";
+
   const randomPage = Math.floor(Math.random() * totalPages) + 1;
-  const response = await API.get(`/discover/${fixType}`, {
-    params: {
-      sort_by: "popularity.desc",
-      page: randomPage,
-      include_adult: false,
-    },
-  });
-  const movies = response.data.results;
-  return movies;
+
+  try {
+    const response = await API.get(`/discover/${fixType}`, {
+      params: {
+        include_adult: false,
+        include_null_first_air_dates: false,
+        language: "en-US",
+        page: randomPage,
+        sort_by: "popularity.desc",
+      },
+    });
+
+    return response.data.results;
+  } catch (error) {
+    console.error("Error fetching random movies:", error);
+    return [];
+  }
 };
 
 export const getMovieById = async (id: string, type: string = "movie") => {
