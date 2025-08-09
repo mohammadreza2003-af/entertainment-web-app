@@ -3,12 +3,23 @@
 import { Search, X } from "lucide-react";
 import { Input } from "../ui/input";
 import { useSearchStore } from "@/store";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams, usePathname } from "next/navigation";
+import { useEffect } from "react";
 
 export default function SearchBox() {
   const { search, setSearch } = useSearchStore();
   const router = useRouter();
   const searchParams = useSearchParams();
+  const pathname = usePathname();
+
+  useEffect(() => {
+    if (search) {
+      setSearch("");
+      const params = new URLSearchParams(searchParams.toString());
+      params.delete("search");
+      router.replace(`?${params.toString()}`);
+    }
+  }, [pathname]);
 
   const updateQuery = (value: string) => {
     const params = new URLSearchParams(searchParams.toString());
