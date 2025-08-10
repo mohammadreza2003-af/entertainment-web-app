@@ -48,8 +48,13 @@ export const getRandomMovies = async (
 };
 
 export const getMovieById = async (id: string, type: string = "movie") => {
-  const res = await API.get(`/${type}/${id}`);
-  return res.data;
+  try{
+
+    const res = await API.get(`/${type}/${id}`);
+    return res.data;
+  }catch(error) {
+    console.error("Error fetching movie:", error)
+  }
 };
 
 export const searchMovie = async (query: string) => {
