@@ -1,9 +1,13 @@
 import API from "@/lib/axios";
 
 export async function getTrandMoives() {
-  const res = await API.get("/trending/movie/day");
-  const data = await res.data;
-  return data.results;
+  try{
+    const res = await API.get("/trending/movie/day");
+    const data = await res.data;
+    return data.results;
+  }catch(error){
+    console.error("Error fetching trend movies", error);
+  }
 }
 
 type MediaType = "movies" | "series";
