@@ -49,7 +49,6 @@ export const getRandomMovies = async (
 
 export const getMovieById = async (id: string, type: string = "movie") => {
   try{
-
     const res = await API.get(`/${type}/${id}`);
     return res.data;
   }catch(error) {
