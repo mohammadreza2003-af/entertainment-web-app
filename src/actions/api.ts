@@ -1,11 +1,11 @@
 import API from "@/lib/axios";
 
 export async function getTrandMoives() {
-  try{
+  try {
     const res = await API.get("/trending/movie/day");
     const data = await res.data;
     return data.results;
-  }catch(error){
+  } catch (error) {
     console.error("Error fetching trend movies", error);
   }
 }
@@ -52,11 +52,11 @@ export const getRandomMovies = async (
 };
 
 export const getMovieById = async (id: string, type: string = "movie") => {
-  try{
+  try {
     const res = await API.get(`/${type}/${id}`);
     return res.data;
-  }catch(error) {
-    console.error("Error fetching movie:", error)
+  } catch (error) {
+    console.error("Error fetching movie:", error);
   }
 };
 
